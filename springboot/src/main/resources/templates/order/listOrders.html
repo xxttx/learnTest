@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http：//www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>在线购物系统</title>
+</head>
+<body>
+<div class="content">
+    <!--    header部分    -->
+    <div th:insert="header :: header"></div>
+    <!--    body部分    -->
+    <div class="body">
+        <!--      菜单部分      -->
+        <div th:replace="left :: left"></div>
+
+        <div class="right">
+            <!--      内容渲染部分          -->
+            <div class="right_content">
+                <div th:each="item: ${order}" class="product">
+                    订单号： <span th:text="${item.orderNo}"></span><br/>
+                    商品名称：<span th:text="${item.productName}"></span><br/>
+                    成交时间：<span th:text="${#dates.format(item.dateTime, 'yyyy-MM-dd HH:mm:ss')}"></span><br/>
+                    购买数量：<span th:text="${item.number}"></span><br/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .order {
+        display: block;
+        text-align: right;
+    }
+
+    .right_content {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .product {
+        border: 1px solid black;
+        padding: 10px 10px;
+        margin: 5px 5px;
+    }
+</style>
+
+</body>
+</html>

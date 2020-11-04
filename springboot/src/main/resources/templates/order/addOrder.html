@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http：//www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>在线购物系统</title>
+</head>
+<body>
+<div class="content">
+    <!--    header部分    -->
+    <div th:insert="header :: header"></div>
+    <!--    body部分    -->
+    <div class="body">
+        <!--      菜单部分      -->
+        <div th:replace="left :: left"></div>
+
+        <div class="right">
+            <!--      内容渲染部分          -->
+            <div class="right_content">
+
+                <form action="/order/addOrder" method="post">
+                    <input type="hidden" name="productCode" th:value="${product.code}">
+                    商品名称：<input type="text" name="productName" th:value="${product.name}" th:disabled><br>
+                    购买数量：<input type="text" name="number" value="1" th:value="${order?.number}"> <span th:if="${msg}!=null">[[${msg}]]</span><br>
+                    <input type="hidden" name="memberCode" th:value="${session.member.code}">
+                    用户名：<input type="text" name="memberName" th:value="${session.member.name}" th:disabled><br>
+                    手机号：<input type="text" name="mobile" th:value="${order?.mobile}"><br>
+                    收货地址：<input type="text" name="address" th:value="${order?.address}"><br>
+                    <input type="submit" value="下单">
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .order {
+        display: block;
+        text-align: right;
+    }
+
+    .right_content {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .product {
+        border: 1px solid black;
+        padding: 10px 10px;
+        margin: 5px 5px;
+    }
+</style>
+
+</body>
+</html>
